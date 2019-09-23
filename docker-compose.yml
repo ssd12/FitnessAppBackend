@@ -1,0 +1,16 @@
+web:
+  build: .
+  environment:
+    - PYTHONUNBUFFERED=1
+  command: bash -c "export FLASK_APP=application.py && flask run --host 0.0.0.0"
+  ports:
+    - "5000:5000"
+  links:
+    - mongodb
+mongodb:
+  image: mongo:3.0.2
+  ports:
+    - "27017:27017"
+  volumes:
+    - /data/db:/data/db
+  command: --smallfiles
